@@ -1,0 +1,193 @@
+1. Implementați o clasă JS numită Student cu următoarele atribute:
+a. nume
+b. prenume
+c. data_nasterii
+d. foaie_matricola (șir de valori numerice)
+Clasa are metodele:
+a. afiseazaVarsta(): returnează vârsta calculată în funcție de data nașterii
+b. afiseazaNotele(): returnează un șir de caractere obținut prin alăturarea și separarea cu ‘,’ a 
+tuturor notelor existente
+c. calculeazaMedia(): returnează media aritmetică a notelor existente
+d. adaugaNota(nota_noua): adaugă în lista de note noua valoare primită ca parametru
+Să se definească un șir de 3 studenți cu datele predefinite. Să se ordoneze și să se afișeze studenții:
+- alfabetic, ținând cont de nume și prenume
+- după medii
+- după vârstă
+1’. Se vor adăuga noi valori pt. note și se va re-apela ordonarea după medii.
+1’’. Se vor schimba numele anumitor studenți și se va re-apela ordonarea alfabetică.
+1’’’. Se vor adăuga noi studenți în listă. Se vor șterge studenți din listă. Se vor afișa noile liste rezultate.
+2. Să se modifice metodele existente în clasa definită la pct. 1 și să se înlocuiască cu funcții lambda (unde este 
+posibil).
+3. Să se completeze clasa cu metode setter pt. atributele nume, prenume și data_nasterii. Se vor trata 
+exceptiile date de:
+- siruri de caractere cu lungimea mai mică decât 2 sau care conțin caractere numerice;
+- date de naștere mai recente de 18 ani.
+Excepțiile se tratează prin setarea unor valori implicite și afișarea unor mesaje în consola browser-ului.
+4. Să se implementeze o pagină web care afișează în mod dinamic o serie de elemente de tip div colorate cu 
+toate valorile posibile (saturate) dintr-o paletă de culori
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<title>Muntean Marius-Lucian</title>
+<script>
+class Student {
+  constructor(nume, prenume,data_nasterii,foaie_matricola) {
+    this.nume = nume;
+    this.prenume = prenume;
+	this.data_nasterii= data_nasterii;
+	this.foaie_matricola= foaie_matricola;
+  }
+  
+  
+  
+	set setNume(numele) {
+	  try {
+   
+    if(typeof numele == 'number' || numele=== " ") throw console.log("Nu este un nume! Este un numar sau un sir gol!");
+	
+  }
+  catch(err) {
+    console.log("Eroare!!");
+  }
+    this.nume = numele;
+}
+set setPrenume(prenumele) {
+ try {
+    if(typeof prenumele == 'number'|| prenumele === " ") throw console.log("Nu este un prenume! Este un numar sau un sir gol!");
+  }
+  catch(err) {
+    console.log("Eroare!!");
+  }
+	 this.prenume = prenumele;
+	 }
+	 
+	 
+	 
+set setData_nasterii(aniversare) {
+ try {
+    
+    if(afiseazaVarsta(aniversare) < 18) throw console.log("Nu a implinit 18 ani!");
+  }
+  catch(err) {
+    console.log("Nu a implinit 18 ani!");
+  }
+	 this.data_nasterii = aniversare;
+	 }
+
+  
+	
+
+   afiseazaVarsta(a) { 
+     var data = new Date(a);
+    var age_diff = Date.now() - data.getTime();
+    var diff_date = new Date(age_diff);
+	
+    return Math.abs(diff_date.getUTCFullYear() - 1970);
+}
+
+
+
+afiseazaNotele(a) {        
+const note = a.split('').map(Number);
+
+return note;
+}
+ 
+ adaugaNota(a) {
+ var sir = this.foaie_matricola;
+sir = sir.concat(a);
+return sir.split('');
+ 
+ }
+ calculeazaMedia(a) {
+
+  
+const media = a.reduce((a, b) => a + b, 0) / a.length; 
+return media;
+ }
+
+
+
+} 
+
+const st = [];
+
+st.push (new Student("Muntean","Marius-Lucian","2001-10-14", "7671992"));
+st.push (new Student("Moldovan ","Anca","2005-12-09", "8898674")); 
+st.push (new Student("Apetroaie","Aurel","1998-10-25", "6754987")); 
+document.write("Nume,Prenume: " + st[0].nume +  st[0].prenume +"<br>Varsta: "
++ st[0].afiseazaVarsta(st[0].data_nasterii)+" ani"+"<br>Note: "
++ st[0].afiseazaNotele(st[0].foaie_matricola) +"<br>Note + nota adaugata:" +st[0].adaugaNota("9")
+ + "<br>Media notelor= " + st[0].calculeazaMedia(st[0].afiseazaNotele(st[0].foaie_matricola))+ "<br>");
+ 
+st.sort(function (a, b) {
+  if (a.nume < b.nume) {
+    return -1;
+  }
+  else if(a.prenume < b.prenume){
+  
+  return -1 }
+  if (a.nume > b.nume) {
+    return 1;
+  }
+  else if (a.prenume>b.prenume){
+  return 1;
+  }
+  
+  return 0;
+});
+document.write("<br>SORTAREA DUPA NUME SI PRENUME: <br>");
+for(var i in st)  {  
+
+for(var prop in st[i]) {  
+document.write( "<br>" + prop + ": " + st[i][prop] + "<br>"); 
+}
+document.write("<hr>");
+}
+
+const st1 = [
+st[0].calculeazaMedia(st[0].afiseazaNotele(st[0].foaie_matricola)) + " " + "= Media lui" + " " + st[0].nume + " " +st[0].prenume + " ",
+st[1].calculeazaMedia(st[1].afiseazaNotele(st[1].foaie_matricola)) + " " + "= Media lui" + " " + st[1].nume + " " +st[1].prenume + " ",
+st[2].calculeazaMedia(st[2].afiseazaNotele(st[2].foaie_matricola)) + " " + "= Media lui" + " " + st[2].nume + " " +st[2].prenume + " "
+
+];
+
+document.write("<br>SORTAREA DUPA MEDIE: <br>");
+
+  let sir_sortat_medie =  st1.sort();
+
+document.write(sir_sortat_medie);
+
+
+const st2 = [
+st[0].afiseazaVarsta(st[0].data_nasterii) + " " + "= Varsta lui" + " " + st[0].nume + " " +st[0].prenume + " ",
+st[1].afiseazaVarsta(st[1].data_nasterii) + " " + "= Varsta lui" + " " + st[1].nume + " " +st[1].prenume + " ",
+st[2].afiseazaVarsta(st[2].data_nasterii) + " " + "= Varsta lui" + " " + st[2].nume + " " +st[2].prenume + " "
+
+];
+document.write("<br>SORTAREA DUPA VARSTA: <br>");
+
+let sir_sortat_varsta = st2.sort();
+
+document.write(sir_sortat_varsta);
+
+//verificare exceptii puse
+var student = new Student(" " ," ", "2011-03-04 " ,"2143254");
+
+student.setNume = 3245;
+student.setPrenume = " ";
+student.setData_nasterii = "2011-03-04";
+
+st.push (new Student("Bates","Marcel","2003-10-15", "5555367"));
+st.push (new Student("Mare ","Aurel","2002-15-09", "4747697")); 
+st.push (new Student("Zahu","Andrei","1999-10-19", "8987695")); 
+
+ st.splice(2,3);
+
+ console.log(st);
+ </script>
+</body>
+</html>

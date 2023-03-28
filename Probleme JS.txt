@@ -1,0 +1,655 @@
+1.Dezvoltați o pagină web cu facilități JavaScript care pozitionează la mijlocul ecranului
+o componentă "div" cu latura de 100 de pixeli, umplută cu roșu. Cand mouse-ul se află deasupra componentei, 
+aceasta este colorată cu albastru.
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Problema1</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<style>
+div {
+
+padding: 10px ; 
+background-color: #ff0000;
+text-align: center;
+
+width: 100px; 
+height: 100px; 
+position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+
+}
+body {
+background-color: aqua;
+
+}
+</style>
+<script>
+  
+	var my_div;
+
+
+function f2(){
+  my_div = document.getElementById("my_div");
+      my_div.style.backgroundColor = "#FF0000";
+
+}
+
+function f1(){
+  my_div = document.getElementById("my_div");
+  my_div.style.backgroundColor = "#0000FF";
+  
+}
+
+</script>
+
+</head>
+
+<body>
+
+Schimbarea culorii unui div prin intermediul mouse-ului
+<hr>
+<br>
+
+<div id="my_div" onMouseOver ="setTimeout(f1,1500)" onMouseOut = "setTimeout(f2,1500)"> DIV
+</div>
+
+
+
+
+</body>
+</html>
+
+2. Dezvoltați o pagină web cu facilități JavaScript care desenează, una langa alta, 
+o serie (10) de componente div colorate cu culori prestabilite. Într-o zonă de pe ecran 
+se afișează codul culorii deasupra căreia se află mouse-ul. Textul este afișat cu culoarea componentei.
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Problema2</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<style>
+
+    .left {
+        display: block;
+        float: left;
+        padding: 20px;
+        border: 1px solid blue;
+    }
+    .clear{
+	clear: both;
+}
+.buton {
+padding:10px;
+border:1px solid magenta;
+float:left;
+background-color:blueviolet;
+
+}
+ 
+    </style>
+<script>
+var my_div;
+
+function culori() {
+    my_div = document.getElementById("c1");
+    my_div.style.backgroundColor = "#C0C0C0";
+    my_div = document.getElementById("c2");
+    my_div.style.backgroundColor = "#800000";
+    my_div = document.getElementById("c3");
+    my_div.style.backgroundColor = "#800080";
+    my_div = document.getElementById("c4");
+    my_div.style.backgroundColor = "#FF00FF";
+    my_div = document.getElementById("c5");
+    my_div.style.backgroundColor = "#FF0000";
+    my_div = document.getElementById("c6");
+    my_div.style.backgroundColor = "#FFFF00";
+    my_div = document.getElementById("c7");
+    my_div.style.backgroundColor = "#000080";
+    my_div = document.getElementById("c8");
+    my_div.style.backgroundColor = "#00FF00";
+    my_div = document.getElementById("c9");
+    my_div.style.backgroundColor = "#000080";
+    my_div = document.getElementById("c10");
+    my_div.style.backgroundColor = "#008000";
+
+
+  }
+  
+  function afisare(color){
+    document.getElementById("color").value=color;
+    document.getElementById("color").style.color=color;
+}
+</script>
+
+</head>
+
+<body>
+    <div>
+        <div class="left" id ="c1" onmouseover ="afisare('#C0C0C0')">0</div>
+        <div class="left" id ="c2" onmouseover ="afisare('#800000')">1</div>
+        <div class="left" id ="c3" onmouseover ="afisare('#800080')">2</div>
+        <div class="left" id ="c4" onmouseover ="afisare('#FF00FF')">3</div>
+        <div class="left" id ="c5" onmouseover ="afisare('#FF0000')">4</div>
+        <div class="left" id ="c6" onmouseover ="afisare('#FFFF00')">5</div>
+        <div class="left" id ="c7" onmouseover ="afisare('#000080')">6</div>
+        <div class="left" id ="c8" onmouseover ="afisare('#00FF00')">7</div>
+        <div class="left" id ="c9" onmouseover ="afisare('#000080')">8</div>
+    <div class="left" id ="c10" onmouseover ="afisare('#008000')">9</div>
+
+        <div class="clear"></div>
+
+<div class ="buton" type="button" onclick="culori()"> Coloreaza </div>
+<input type="text" id="color" value = "cod culoare"> </input>
+
+</body>
+</html>
+
+3. Dezvoltați o pagină web cu facilități JavaScript care definește o grilă dreptunghiulară (componente div 
+alăturate, dispuse matricial; dimensiunea grilei este prestabilită). Elementul din stânga sus este colorat diferit.
+Definiți 4 taste la apăsarea cărora elementul colorat “se mută” pe celula imediat următoare din stânga, 
+dreapta, sus sau jos (doar dacă mișcarea este posibilă).
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Problema3</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<style>
+.container {
+  border: 2px solid;
+  width: 200px;
+  height: 100px;
+ 
+  background-image: linear-gradient(transparent 19px, black 19px), 
+  linear-gradient(90deg, white 19px, black 19px);
+  background-size: 20px 20px;
+
+}
+
+
+    </style>
+
+<script>
+  function coordonate(x1, y1) {
+  var x = document.getElementById('div').style.marginLeft;
+  var y = document.getElementById('div').style.marginTop;
+  x = parseInt(x) + 20 * x1;
+  y = parseInt(y) + 20 * y1;
+  
+  document.getElementById('div').style.marginLeft = x + 'px';
+  document.getElementById('div').style.marginTop = y + 'px';
+}
+
+  </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div id="div" style="margin-left: 0px; margin-top: 0px; width: 20px;
+        height: 20px;
+        background-color: blue;"></div>
+      </div>
+     
+        <button  onclick="coordonate('0','-1')">up</button>
+        <button  onclick="coordonate('0','1')">down</button>
+        <button  onclick="coordonate('-1','0')">left</button>
+        <button  onclick="coordonate('1','0')">right</button>
+      
+</body>
+</html>
+
+4.  Dezvoltați o pagină web cu facilități JavaScript care definește o grilă dreptunghiulară (componente div 
+alăturate, dispuse matricial; dimensiunea grilei este prestabilită). 
+La trecerea cu mouse-ul peste componente, acestea își schimbă culoarea.
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Problema4</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<style>
+.container_div {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+.div {
+  background-color: white;
+  border: 2px solid ;
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+ 
+    </style>
+
+<script>
+  
+function f1(){
+   document.getElementById("div1").style.backgroundColor = "magenta";
+}
+function f2(){
+   document.getElementById("div2").style.backgroundColor = "gold";
+}
+function f3(){
+   document.getElementById("div3").style.backgroundColor = "navy";
+}
+function f4(){
+   document.getElementById("div4").style.backgroundColor = "maroon";
+}
+function f5(){
+   document.getElementById("div5").style.backgroundColor = "coral";
+}
+function f6(){
+   document.getElementById("div6").style.backgroundColor = "cadetblue";
+}
+function f7(){
+   document.getElementById("div7").style.backgroundColor = "cornsilk";
+}
+function f8(){
+   document.getElementById("div8").style.backgroundColor = "aqua";
+}
+function f9(){
+   document.getElementById("div9").style.backgroundColor = "fuchsia";
+  
+}
+
+
+  </script>
+
+</head>
+
+<body>
+    <div class="container_div" id="container">
+        <div class="div" id="div1" style = "background-color: red" onMouseOver = "f1()"></div>
+        <div class="div" id="div2" style = "background-color: blue" onMouseOver = "f2()"></div>
+        <div class="div" id="div3" style = "background-color: lime" onMouseOver = "f3()"></div>  
+        <div class="div" id="div4" style = "background-color: blueviolet" onMouseOver = "f4()"></div>
+        <div class="div" id="div5" style = "background-color: gold" onMouseOver = "f5()"></div>
+        <div class="div" id="div6" style = "background-color: navy" onMouseOver = "f6()"></div>  
+        <div class="div" id="div7" style = "background-color: orange" onMouseOver = "f7()"></div>
+        <div class="div" id="div8" style = "background-color: red" onMouseOver = "f8()"></div>
+        <div class="div" id="div9" style = "background-color: greenyellow" onMouseOver = "f9()"></div>  
+      </div>
+
+      
+</body>
+</html>
+
+5. Dezvoltați o pagină web cu facilități JavaScript care afișează ora curentă (hh:mm:ss), actualizată o dată pe 
+secundă (obiect de tip Date, apel repetat de cod prin setInterval() sau setTimeout()).
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Problema 6</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+#time {
+font-size:25px;
+background-color:black;
+color: red;
+
+
+}
+
+</style>
+
+
+<script>
+ function refresh(){
+    var r=1000; 
+    time=setTimeout('display_time()',r)
+    }
+    refresh()
+
+    function display_time() {
+    var x = new Date()
+
+   if(x.getHours() >= 12){
+     m = "PM";
+
+   }else   m = "AM";
+    
+    var y=x.getMonth() + 1+ "/" + x.getDate() + "/" + x.getFullYear(); 
+    y = y + " "+ x.getHours()+ ":" +  x.getMinutes() + ":" +  x.getSeconds() + " " + m;
+    document.getElementById("time").innerHTML = y;
+    refresh();
+     }
+    
+    </script>
+<body>
+    <div id="time"></div>
+
+    </body>
+
+
+
+</script>
+
+</html>
+
+
+6.  Dezvoltați o pagină web cu facilități JavaScript care permite introducerea unei parole. Gradul de 
+rezistență a parolei la atacuri (lungime, caractere majuscule si minuscule, caractere numerice și 
+speciale) este calculat (1..10) pe masură ce parola este scrisă (evenimente de tastatură) iar utilizatorul este 
+informat in timp real asupra gradului de rezistență calculat prin afisarea valorii numerice.
+Utilizatorul este informat în timp real asupra gradului de rezistență calculat prin modificarea culorii unei 
+componente de tip <div> din roșu -> portocaliu -> galben -> verde.
+Utilizatorul este informat în timp real asupra gradului de rezistență calculat prin modificarea dimensiunii
+unei componente de tip <div> (rezistență mai mare, dimensiune mai mare)
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Problema2</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<style>
+body{
+    background-color: cyan;
+}
+    #id1{ 
+        background-color: red;
+    }
+    #id2{
+        background-color: orange;
+
+    }
+    #id3{
+        background-color: yellow;
+    }
+    #id4{
+        background-color: green;
+    }
+    form{
+    float:left;
+    }
+    button{
+background-color: lightcoral;
+
+
+    }
+    input{
+        background-color: lightcoral;
+    }
+    .element{
+        position:relative;
+        left: 475px;
+        top:-21px;
+    
+        background-color:green;
+    }
+</style>
+<script>
+
+function f1(){
+    displayer = document.getElementById("displayer");
+	var password = document.getElementById("p1");
+    var strength = 0;
+    var textAfisat =" ";
+
+if (password.value.length < 5) {
+  textAfisat += "Parola este prea scurta!<br>";
+}
+else {
+    strength += 1;
+  }
+
+
+  if (password.value.match(/[a-z]/) && password.value.match(/[A-Z]/)) {
+    strength += 1;
+  } else {
+    textAfisat += "Adauga cel putin o minuscula si o majuscula!<br>";
+  }
+
+  
+  if (password.value.match(/\d/)) {
+    strength += 1;
+  } else {
+    textAfisat += "Adauga cel putin un numar!<br>";
+  }
+
+ 
+  if (password.value.match(/[^a-zA-Z\d]/)) {
+    strength += 1;
+  } else {
+    textAfisat += "Adauga cel putin un caracter special! <br> ";
+  }
+
+ 
+  
+
+
+  if (strength < 2) {
+   var x = document.getElementById("id1").innerHTML ="Mai incearca!";
+    x = document.getElementById("id2").innerHTML ="";
+  } else if (strength === 2) {
+     x = document.getElementById("id2").innerHTML ="Parola este prea slaba!";
+     x = document.getElementById("id1").innerHTML ="";
+  } else if (strength === 3) {
+     x = document.getElementById("id2").innerHTML ="";
+     x = document.getElementById("id1").innerHTML ="";
+     x = document.getElementById("id3").innerHTML ="Parola este buna!";
+  } else{
+     x = document.getElementById("id3").innerHTML ="";
+     x = document.getElementById("id2").innerHTML ="";
+     x = document.getElementById("id1").innerHTML ="";
+     x = document.getElementById("id4").innerHTML ="Parola este grozava!";
+  }
+  displayer.innerHTML = textAfisat;
+}
+function reset(){  
+   document.getElementById("id1").innerHTML ="";
+   document.getElementById("id2").innerHTML ="";
+   document.getElementById("id3").innerHTML ="";
+   document.getElementById("id4").innerHTML ="";
+   document.getElementById("displayer").innerHTML ="";
+   document.getElementById("this").innerHTML ="";
+
+ }  
+ document.addEventListener("input", f1);
+
+function f2(){
+
+    const x = document.getElementById("this");
+
+    if (x.style.display == "none") {
+     
+        x.style.display = "block";
+      }
+}
+
+
+
+</script>
+
+</head>
+
+
+<h2>PAROLA</h2>
+
+<form>
+  Introduceti parola: <input type="password" name="p1" id="p1">
+        
+        <input type="reset" value="Clear">
+        
+    </form>
+    <button id="arataDiv" onclick="f2()" >Insert</button>
+    <button onclick="reset();" >Reset</button>
+
+    <div class="element" id="this" style="display:none">Parola inregistrata cu succes!!!</div>
+
+  <div id="displayer"></div>
+
+  <div id="id1"></div>
+  <div id="id2"></div>
+  <div id="id3"></div>
+  <div id="id4"></div>
+ 
+
+
+
+</body>
+</html>
+
+7.  Dezvoltați o pagină web cu facilități JavaScript care afișează două câmpuri pt. introducerea unei date. Se 
+validează datele introduse doar dacă delimitează un interval mai mare de 3 luni.
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<title>Problema3</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<script>
+   function diferenta() {
+
+    var d1 = new Date(document.getElementById("data1").value);
+    var d2 = new Date(document.getElementById("data2").value);
+    var months;
+    var difference = d2 - d1;
+
+  var months = Math.trunc(difference/(24*3600*1000*30));
+
+   if(months>3){
+    document.getElementById("div").innerHTML= "Diferenta dintre cele 2 date: " + months + " luni";
+    document.getElementById("div").style.backgroundColor = "green";
+   } else {
+    document.getElementById("div").innerHTML="Intervalul dintre cele 2 date introduse este mai mic decat 3!";
+    document.getElementById("div").style.backgroundColor = "red";
+   }
+
+}
+        
+</script>
+
+<input style="background-color:salmon; color: white" id="data1" type="date"  ><br>
+<input style="background-color:salmon; color: white" id="data2" type="date"  >
+<button style="background-color:aqua" onclick="diferenta()">Diferenta</button>
+<div style="color:white" id= "div"> </div>
+</html>
+
+
+8.  Dezvoltați o pagină web cu facilități JavaScript care afișează 2 componente de text exclusiv numeric limitat 
+între valorile 100-400. La apăsarea unui buton, un cerc (componentă <div> cu atributul border-radius
+setat corespunzător) se poziționează pe ecran în funcție de valorile scrise în componente (stânga, sus).
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<title>Problema4</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<style>
+#cerc{
+
+    background-color: red;
+
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    top:95px;
+    float:left;
+    position:relative;
+  
+
+
+
+}
+body {
+background-color: cyan;
+
+
+}
+
+</style>
+
+
+
+<script>
+function f1(){
+
+n1=document.getElementById("number1").value;
+n2=document.getElementById("number2").value;
+
+
+document.getElementById('cerc').style.setProperty("top", n1+"px");
+document.getElementById('cerc').style.setProperty("left", n2+"px");
+}
+</script>
+
+<body>
+
+    
+        <input type="number" name="number1" id="number1" min="100" max="400">
+        <input type="number" name="number2" id="number2" min="100" max="400">
+        <button id="buton" onclick="f1();">Buton</button>
+    
+
+
+<div id ="cerc">
+
+</div>
+
+
+</body>
+
+
+</html>
+
+9. 
+
